@@ -1,5 +1,8 @@
 module URLValidator
 
-# package code goes here
+# source files
+include("validator.jl")
 
-end # module
+export Validator, urlsplit, scheme_is_valid, ValidationError, URIComponents
+
+end  # module
