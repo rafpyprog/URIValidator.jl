@@ -3,10 +3,12 @@ using Base.Test
 
 
 function test_url_split_return_type()
+    println("test url split return type")
     URI = "http://julialang.org"
     result = urlsplit(URI)
+    println(typeof(result))
     @test isa(result, URIComponents)
-
+end
 
 function test_urlsplit()
     #= Each case is a tuple with the url and the expected result. =#
@@ -77,16 +79,16 @@ end
 
 
 @testset "Module" begin
-    @testset "URLValidador Exceptions" begin
-        test_urlvalidator_exception_for_invalid_scheme()
-    end
+    #@testset "URLValidador Exceptions" begin
+    #    test_urlvalidator_exception_for_invalid_scheme()
+    #end
 
     @testset "URL Split" begin
         test_url_split_return_type()
-        test_urlsplit()
+        #test_urlsplit()
     end
 
-    @testset "Scheme Validation" begin
-        test_schema_validation()
-    end
+    #@testset "Scheme Validation" begin
+    #    test_schema_validation()
+    #end
 end

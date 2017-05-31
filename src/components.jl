@@ -17,3 +17,6 @@ type URIComponents
                            this.fragment)
     end
 end
+
+a = Dict([("scheme", "2"), ("authority", "2"), ("path", "2"), ("query", "2"), ("fragment", "2")])
+URIComponents(a)
