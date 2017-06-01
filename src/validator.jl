@@ -1,3 +1,5 @@
+#!/usr/bin/julia
+
 __precompile__()
 
 include("urlsplit.jl")
@@ -38,33 +40,37 @@ function authority_is_valid(authority)
 
    authority   = [ userinfo "@" ] host [ ":" port ]
     =#
-    pass
+    x = 1
 end
 
 function path_is_valid(path)
+    x = 2
     #= If a URI contains an authority component, then the path component
    must either be empty or begin with a slash ("/") character.  =#
 end
 
 
 type Validator
-    url
+    URI
     scheme
+    authority
 
     function Validator(URI)
         this = new()
         this.URI = URI
-        URI_components = urlsplit(this.URI)
+
+        URI_components = URISplit(this.URI)
 
         # scheme validation
         this.scheme = URI_components.scheme
+        
         if !scheme_is_valid(this.scheme)
             throw(ValidationError("Scheme '" * this.scheme * "' is invalid."))
-        else
+        end
 
         #authority validation'
         this.authority = URI_components.authority
-            println("ok")
-        end
+
+        return this
     end
 end

@@ -1,6 +1,5 @@
 include("components.jl")
 
-
 function splitnetloc(url, start=0)
     component_delims = "/?#"
     delim = length(url) # position of end of domain part of url, default is end
@@ -40,7 +39,7 @@ function has_delimiter(url, delimiter)
 end
 
 
-function urlsplit(url, allow_fragments=true)
+function URISplit(url, allow_fragments=true)
     #= Parse a URL into 5 components:
     <scheme>://<netloc>/<path>?<query>#<fragment> =#
     netloc = query = fragment = ""

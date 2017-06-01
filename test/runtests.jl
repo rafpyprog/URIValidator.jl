@@ -1,18 +1,19 @@
-using URLValidator
+#!/usr/bin/julia
+
+using URIValidator
 using Base.Test
 
 
-function test_url_split_return_type()
-    println("test url split return type")
+function test_URISplit_return_URIcomponets()
     URI = "http://julialang.org"
-    result = urlsplit(URI)
+    result = URISplit(URI)
     println(typeof(result))
     @test isa(result, URIComponents)
 end
 
-function test_urlsplit()
-    #= Each case is a tuple with the url and the expected result. =#
 
+function test_URISplit_RFC()
+    #= Each case is a tuple with the url and the expected result. =#
     cases = [
         ("http://julialang.org",
             ("http", "julialang.org", "", "", "" )),
@@ -41,10 +42,8 @@ function test_urlsplit()
     for case in cases
         url = case[1]
         expected_result = case[2]
-        r = urlsplit(url)
-        println(r)
-        @test isa(r, URIComponents)
-        @test expected_result == r.components
+        result = URISplit(url)
+        @test isequal(expected_result, result.components)
     end
 end
 
@@ -72,23 +71,23 @@ function test_schema_validation()
 end
 
 
-function test_urlvalidator_exception_for_invalid_scheme()
-    case = (".https://julialang.org/")
-    @test_throws ValidationError Validator(case)
+function test_Validator_exception_for_invalid_scheme()
+    URI = (".https://julialang.org/")
+    @test_throws ValidationError Validator(URI)
 end
 
 
 @testset "Module" begin
-    #@testset "URLValidador Exceptions" begin
-    #    test_urlvalidator_exception_for_invalid_scheme()
-    #end
-
-    @testset "URL Split" begin
-        test_url_split_return_type()
-        #test_urlsplit()
+    @testset "URLValidador Exceptions" begin
+        test_Validator_exception_for_invalid_scheme()
     end
 
-    #@testset "Scheme Validation" begin
-    #    test_schema_validation()
-    #end
+    @testset "URL Split" begin
+        test_URISplit_return_URIcomponets()
+        test_URISplit_RFC()
+    end
+
+    @testset "Validators" begin
+        test_schema_validation()
+    end
 end

@@ -1,12 +1,18 @@
 type URIComponents
-    scheme::String
-    authority::String
-    path::String
-    query::String
-    fragment::String
+    scheme
+    authority
+    path
+    query
+    fragment
     components
 
     function URIComponents(splited_URI)
+        splited_URI_size = length(splited_URI)
+        if splited_URI_size != 5
+            message = "Splited URI length($splited_URI_size) is not valid. Should be 5"
+            throw(ArgumentError(message))
+        end
+
         this = new()
         this.scheme = splited_URI["scheme"]
         this.authority = splited_URI["authority"]
@@ -15,8 +21,6 @@ type URIComponents
         this.fragment = splited_URI["fragment"]
         this.components = (this.scheme, this.authority, this.path, this.query,
                            this.fragment)
+        return this
     end
 end
-
-a = Dict([("scheme", "2"), ("authority", "2"), ("path", "2"), ("query", "2"), ("fragment", "2")])
-URIComponents(a)
