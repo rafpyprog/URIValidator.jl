@@ -1,4 +1,5 @@
-#!/usr/bin/julia
+#= This file is a part of URIValidator. License is MIT:
+https://github.com/rafpyprog/URIValidator.jl/blob/master/LICENSE.md =#
 
 __precompile__()
 
@@ -63,7 +64,7 @@ type Validator
 
         # scheme validation
         this.scheme = URI_components.scheme
-        
+
         if !scheme_is_valid(this.scheme)
             throw(ValidationError("Scheme '" * this.scheme * "' is invalid."))
         end

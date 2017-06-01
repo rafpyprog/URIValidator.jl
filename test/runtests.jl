@@ -1,4 +1,5 @@
-#!/usr/bin/julia
+#= This file is a part of URIValidator. License is MIT:
+https://github.com/rafpyprog/URIValidator.jl/blob/master/LICENSE.md =#
 
 using URIValidator
 using Base.Test
